@@ -1,0 +1,18 @@
+for i in range(5, 50, 3):       
+    # empezar en 5, hasta 50 (sin incluir), saltos de 3 # 
+    
+for i in range(10, 0, -1):   # 10,9,8,...,1 → cuenta regresiva
+for i in range(n-1, -1, -1): # para invertir listas sin usar [::-1]
+
+list(range(10, 0, -2))  # → [10, 8, 6, 4, 2]
+list(range(5, -5, -1))  # → [5,4,3,2,1,0,-1,-2,-3,-4]
+
+for _ in range(5):
+    print("Hola")  # imprime 5 veces sin usar una variable inútil
+
+Dirección,range completo,versión corta más usada,ejemplo con “tuanis” (7 letras)
+
+Adelante normal,"range(0, 7, 1)",range(7) o range(len(pal)),0 1 2 3 4 5 6
+Adelante con salto,"range(0, 7, 2)","range(0, len(pal), 2)",0 2 4 6
+Atrás normal,"range(6, -1, -1)","range(len(pal)-1, -1, -1)",6 5 4 3 2 1 0
+Atrás con salto,"range(6, -1, -2)","range(len(pal)-1, -1, -2)",6 4 2 0

@@ -1,0 +1,44 @@
+Inicio
+
+Leer temas de estudio
+Separar temas de estudio para estudiar y practicar uno por semana
+Leer 1 hora diaria y realizar autotest de lo aprendido
+ Si fallo el autotest, leer hora y media 
+ Mientras no obtenga calificacion perfecta
+ Seguir leyendo y haciendo autotest
+ Si obtengo calificacion perfecta, repasar con un companero hasta entender
+Fin
+
+**Viaje**
+
+Inicio
+
+Decidir destino de unos 3 dias
+Una vez; buscar el precio, fecha y lugar
+ Si el lugar esta reservado o no entra en presupuesto
+ Esperar a que baje y que haya una fecha conveniente
+ Al encontrar fecha y precio adecuados, reservar destino
+Investigar sobre temperatura del destino y precio total del viaje
+Ir a buscar atuendo apropiado para el clima por unos 3 dias
+Estar seguro de tener presupuesto para comer y viajar durante 3 dias en el destino
+ Hasta no tener los suficiente seguir ahorrando
+Llegar al destino y conocer al menos 3 lugares turisticos
+Fin
+
+**fiesta**
+
+Inicio
+
+Comprar objetos y comida de fiesta sorpresa para  Marcio
+Calcular de la hora que Marcio sale de su trabajo a cuanto dura llegando
+Mientras Marcio llegan
+ Alistar las cosas de fiesta
+ Hasta que no falten 5 minutos, seguir decorando
+Si Marcio se demora, llamarlo a ver donde esta
+ Si faltan mas de 20 minutos, jugar juegos de mesa mientras llegan
+ Seguir jugando hasta que falten 5 
+Si esta a menos de 20 esperar a que llegue
+Cuando llegue, cantar cumpleanos y comer pastel
+Invitarlo a un juego de mesa
+Despedirse de Marcio y su familia
+Fin

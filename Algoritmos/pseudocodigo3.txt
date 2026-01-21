@@ -1,0 +1,25 @@
+Inicio
+
+Definir numero
+Deinir contador
+Definir suma
+
+Pedir numero
+
+Mostrar "Ingrese un numero"
+
+contador = 1
+suma = 0
+
+Mientras contador <== numero hacer
+contador = contador + 1
+suma = suma + contador
+
+Mostrar "EL resultado es"
+Mostrar suma
+
+
+Fin
+
+
+

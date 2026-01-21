@@ -1,0 +1,21 @@
+Inicio
+
+Definir precio
+Definir descuento 
+Definir PrecioFinal
+
+
+descuento = 0
+Pedir precio
+
+Mostrar "Cual es el precio del producto"
+
+Si (precio < 100)descuento = precio * 0.02
+Sino descuento = precio * 0.10
+Finsi
+
+Preciofinal = precio - descuento
+
+Mostrar "El precio final es'
+Mostrar PrecioFinal
+Fin
