@@ -1,0 +1,19 @@
+Inicio
+
+Definir numero1
+Definir numero2
+Definir primero
+Definir segundo
+
+Pedir numero1
+Pedir numero2
+
+Si (numero1 == numero2) Mostrar "Los numeros deben ser distintos"
+Si(numero 1 > numero2) numero1 = primero
+Si(numero 1 < numero2) numero2 = segundo
+
+Mostrar "primero"
+Mostrar "segundo"
+
+Fin
+

@@ -1,0 +1,45 @@
+Inicio
+
+Si tiene computador 
+ Abrir navegador
+ Buscar: https://youtube.com/
+Si no tiene computador y tiene celular
+Si no tiene ninguno de los dos
+ Pedir prestado un dispositivo
+ Abrir aplicacion de youtube
+ Buscar el video de interes
+ Seleccionar calidad
+ Reproducir video
+
+ Fin
+
+
+**Rutina diaria**
+
+ Inicio
+Despertarme
+Agarrar cepillo de dientes y pasta
+Desayunar y cepilarme los dientes con mi cepillo y pasta dental
+Si hay queso y cafe, desayunar quesopinto y tomar cafe
+ Si no hay queso, comer solo pinto
+ Si no hay cafe, tomar aguadculce
+Si no hay nada para desayunar
+ Pedir comida a domicilio
+  Abrir aplicacion de delivery
+  Seleccionar que quiero comer
+  Ir al metodo de pago
+  Seleccionar metodo de pago
+  Pagar y esperar la comida
+  Mientras espero
+  Alistarme para ir al trabajo
+   Banarme
+   Ponerme ropa segun el clima
+   Ponerme colonia
+ Salir por el delivery 
+ Desayunar
+Agarrar cepillo de dientes y pasta
+Mientras tenga pasta en la boca
+ Enjuagar con agua y cepillar
+Irme al trabajo
+
+Fin

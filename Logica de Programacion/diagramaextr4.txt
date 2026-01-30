@@ -1,0 +1,33 @@
+Inicio
+
+Definir mayorprov
+Definir mayor
+Definir numero
+Definir numeros
+Definir contador
+
+Contador = 0
+numeros = []
+
+Pedir mayorprov
+
+Mostrar "Ingrese su numero"
+
+Mientras contador < 100 hacer
+Pedir numero
+Mostrar "Ingrese un numero"
+Agregar numero a numeros
+Contador = Contador + 1
+Finmientras
+
+Por cada numero en numeros
+Si(mayorprov > numero) entonces 
+mayorprov = mayor
+Finsi 
+
+Fin
+
+
+
+
+
