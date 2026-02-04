@@ -38,4 +38,6 @@ def student_notes():
         return notes
     
 
-    
+def file_reader(route):
+    with open(route, 'r', encoding="utf-8") as file:
+        
