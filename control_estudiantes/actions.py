@@ -1,3 +1,5 @@
+import csv
+
 def new_name_student():
     try:
         stud_name = input("Type the student name:",).split()
@@ -40,4 +42,6 @@ def student_notes():
 
 def file_reader(route):
     with open(route, 'r', encoding="utf-8") as file:
-        
+        try:
+            reader = csv.DictReader(file)
+            
