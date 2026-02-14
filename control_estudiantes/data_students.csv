@@ -1,11 +1,6 @@
-[{
-    "name": [""],
-    "grade":[],
-    "notes":{
-        "spanish": 100,
-        "english": 100,
-        "history": 100,
-        "sciences": 100
-            }
-            }
-        ]
+grades, name, spanish, english, history, sciences
+
+grade,name,spanish,english,history,sciences
+1A,['Vane'],87.0,87.0,99.0,1.0
+grade,name,spanish,english,history,sciences
+3C,['Em'],23.0,12.0,14.0,56.0
