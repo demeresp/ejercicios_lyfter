@@ -36,8 +36,7 @@ def all_of_them_average():
 
 def best_3_avrg():
     reader = data_ex_im.file_reader(r"C:\Users\demer\OneDrive\Desktop\ejercicios_lyfter\control_estudiantes\data_students.csv")
-    calc = actions.all_students_average(reader)
-    best_3 = sorted(calc, reverse=True)[:3]
-    print("Current top averages:", best_3)
-    return best_3
+    calc = actions.best_3_avrg(reader)
+    print("Current top averages:", calc)
+    return calc
 

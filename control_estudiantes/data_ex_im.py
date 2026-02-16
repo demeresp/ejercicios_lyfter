@@ -18,7 +18,6 @@ def student_saver(student, file):
         with open(file, 'a', encoding="utf-8") as f:
             columns = ["grade", "name", "spanish", "english", "history", "sciences"]
             content = csv.DictWriter(f, fieldnames=columns)
-            content.writeheader()
             content.writerow(student)
     except FileNotFoundError as error:
         print("The file indicated does not exist")

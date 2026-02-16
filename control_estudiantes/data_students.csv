@@ -1,6 +1,7 @@
-grades, name, spanish, english, history, sciences
+grade,name,spanish,english,history,sciences
+1A,Vane,87.0,87.0,99.0,1.0
+3C,Em,23.0,12.0,14.0,56.0
+5C,Carlos,71.0,23.0,56.0,89.0
+2B,Carol,90.0,45.0,80.0,87.0
+2B,Gonzalo,11.0,90.0,90.0,87.0
 
-grade,name,spanish,english,history,sciences
-1A,['Vane'],87.0,87.0,99.0,1.0
-grade,name,spanish,english,history,sciences
-3C,['Em'],23.0,12.0,14.0,56.0

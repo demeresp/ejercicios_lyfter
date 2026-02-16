@@ -13,7 +13,8 @@ def main_menu():
 
                     To see the best 3 sudents you have. 4 
                     
-                    To close the program. 5 """, ).strip())
+                    To close the program. 5 
+                        -"""    , ).strip())
         
             if "1" in options:
                 add = main.add_student()
