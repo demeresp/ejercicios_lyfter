@@ -1,6 +1,5 @@
 import csv
 
-import os
 
 
 def file_reader(route):
@@ -24,3 +23,13 @@ def student_saver(student, file):
     return content
 
 
+
+def file_saver(file_to_modify, route):
+    try:
+        with open(file_to_modify, "w", encoding="utf-8") as file:
+            content = csv.DictWriter(file, fieldnames="")
+            content.writeheader()
+            content.writerows(file_to_modify)
+    except FileNotFoundError as oops:
+        print("Looks like this file is not foundable right now...")
+    return content

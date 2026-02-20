@@ -27,8 +27,8 @@ def main_menu():
             elif "5" in options:
                 print("Thanks for using the system, see you later!")
                 break
-            else:
-                print("There is no more current features")
+            elif "6" in options:
+                delete = main.delete_student()
     
         except ValueError as error:
             print("You should select only numbers")
