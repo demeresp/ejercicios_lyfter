@@ -100,15 +100,16 @@ def best_3_avrg(route=None):
 
 
 def student_list(route=None):
+        
         try:
             print("Loading current students list...")
             route = data_ex_im.route_validator()
             grades = data_ex_im.file_reader(route) #splitlines para que cada estudiante quede en una línea diferente, sino quedaría todo como un string gigante y no se podría mostrar de forma ordenada
             amount_of_students = len(grades)
-
+            print("The total amount of students is:", amount_of_students)
             for i, student in enumerate(grades, start=1): #segundo i indica donde empezara enumerate
-                print("The total amount of students is:", amount_of_students)
-                print(f"{i}. {student['name']} (Grade: {student['grade']})")
+                
+                print(f"{i}. {student['name']} (Grade: {student['grade']})") 
                 
         except FileNotFoundError as Nofile:
             print("The file provided is not foundable")
@@ -149,7 +150,7 @@ def n_student_dictionary():
 def add_student(existing_students=None, new_students=None, n_route=None):
 
     if not n_route:
-        n_route = input("Please, provide the route of the file you want to add students to:").strip()
+        n_route = data_ex_im.route_validator()
         if not n_route:
             print("The route cannot be empty, please provide a valid route")
             return None
@@ -159,12 +160,9 @@ def add_student(existing_students=None, new_students=None, n_route=None):
         if new_students is None:
             new_students = n_student_dictionary()
 
-        if not existing_students:
-            print("There are no students in the current list, please add a student first")
-            return None
         if not new_students:
             print("There are no new students to add, please add a student first")
-            return None
+            continue
 
         
         already_exists = any(
@@ -194,9 +192,15 @@ def add_student(existing_students=None, new_students=None, n_route=None):
             elif o_des == "n":
                 print("Going back...")
                 break
+            else:
+                print("Make sure you are only typing y or n")
+                continue
         elif f_des == "n":
             print("Cancelled. Going back...")
             return None
+        else:
+            print("Make sure you are only typing y or n")
+            continue
 
 
 
@@ -229,22 +233,49 @@ def unapproved_students(route=None):
     return unapproved
 
 
-def delete_students(route=None):
+#def delete_students(route=None):
+
     route = data_ex_im.route_validator()
     students = data_ex_im.file_reader(route)
-    if not students:
-        print("There are no students to delete.")
-        return None
-    studen_to_delete = input("Please, type the name of the student you want to delete:").strip()
-    found_students = [s for s in students if s["name"].strip().lower() == studen_to_delete.strip().lower()]
-    if not found_students:
-        print(f"No student found with the name {studen_to_delete}.")
-        return None
-    
-    for student in found_students:
-        students.remove(student)
-        print(f"Student {student['name']} has been deleted.")
 
-
-    data_ex_im.file_saver(route, students)
-    return students
+    while True:
+        new_students = []
+        if not students:
+            print("There are no students to delete.")
+            return None
+        try:
+            student_to_delete = input("Please, type the name of the student you want to delete:").strip()
+            student_to_delete_grade = input("Please, type the grade of the student you want to delete:").strip().upper()
+            des = input(f"Are you sure you want to delete {student_to_delete} from grade {student_to_delete_grade}? y / n:").strip().lower()
+            if des == "y":
+                pass
+            elif des == "n":
+                print("Cancelled. Going back...")
+                return None
+            student_exists = any(
+                s["name"].strip().lower() == student_to_delete.strip().lower() and
+                s["grade"].strip().upper() == student_to_delete_grade.strip().upper()
+                for s in students
+            ) 
+            if not student_exists:
+                print("The student you want to delete does not exist, please check the information and try again.")
+                return None
+            new_students = [s for s in students if not (s["name"].strip().lower() == student_to_delete.strip().lower() and s["grade"].strip().upper() == student_to_delete_grade.strip().upper())]
+            new_file = data_ex_im.file_saver(new_students, route)
+            print(f"Student {student_to_delete} from grade {student_to_delete_grade} has been successfully deleted.")
+            o_des = input("Would you like to delete another student? y / n:").strip().lower()
+            if o_des == "y":
+                continue
+            elif o_des == "n":
+                    print("Going back...")
+                    break
+            else:
+                    print("Make sure you are only typing y or n")
+                    continue
+        except ValueError:
+            print("Make sure you are only typing letters for the name and a valid grade format (e.g., '1A', '2B', etc.)")
+            continue
+        except (FileNotFoundError, PermissionError) as error:
+            print(f"Error: {error}. Please provide a valid route and check your permissions.")
+            continue
+    return new_file

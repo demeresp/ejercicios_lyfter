@@ -1,5 +1,5 @@
 import actions
-import data_ex_im
+
 
 def main_menu():
     while True: 
@@ -20,7 +20,9 @@ def main_menu():
                     To check unapproved students. 6
                     
                     To close the program. 7
-                        -"""    , ).strip())
+                            
+                        
+                        :   """    , ).strip())
             if options == "1":
                     actions.add_student()
                     continue
