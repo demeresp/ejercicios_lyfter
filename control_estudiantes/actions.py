@@ -1,5 +1,5 @@
 
-import data_ex_im 
+import data_ex_im
 
 
 def student_name():
@@ -179,7 +179,6 @@ def duplicates_validator(new_students, current_students):
 
 
 def add_student(existing_students, n_route, new_students=None):
-    
     if n_route is None:
         n_route = data_ex_im.route_validator()
     existing_students = data_ex_im.file_reader(n_route)
@@ -257,6 +256,3 @@ def unapproved_students(route=None):
         print("There are no unapproved students.")
     
     return unapproved
-
-
-

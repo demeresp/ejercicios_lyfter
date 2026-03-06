@@ -25,29 +25,29 @@ def main_menu():
                         
                             
                             :   """    , ).strip())
-            if options == "1":
+            if options == 1:
                     actions.add_student(route_to_work_with, route_to_work_with)
                     continue
-            elif options == "2":
+            elif options == 2:
                     actions.student_list(route_to_work_with)
                     continue
-            elif options == "3":
+            elif options == 3:
                     actions.all_students_average(route_to_work_with)
                     continue
-            elif options == "4":
+            elif options == 4:
                     actions.best_3_avrg(route_to_work_with)
                     continue
-            elif options == "5":
+            elif options == 5:
                 actions.unapproved_students(route_to_work_with)
                 continue
-            elif options == "6":
+            elif options == 6:
                 print("Closing the program, see you later!")
                 break
             else:
-                print("Please, only type numbers between 1-7")
+                print("Please, only type numbers between 1-6")
                 continue
         except ValueError:
-                print("You only may type numbers (1-7)")
+                print("You only may type numbers (1-6)")
         except KeyboardInterrupt:
             print("Getting out of the program due to a keyborad interruption, see you later")
         except Exception as error:
