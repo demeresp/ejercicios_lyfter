@@ -19,11 +19,9 @@ def main_menu():
 
                         To see the best 3 sudents you have. 4
                         
-                        To delete a student. 5
+                        To check unapproved students. 5
                         
-                        To check unapproved students. 6
-                        
-                        To close the program. 7
+                        To close the program. 6
                         
                             
                             :   """    , ).strip())
@@ -40,12 +38,9 @@ def main_menu():
                     actions.best_3_avrg(route_to_work_with)
                     continue
             elif options == "5":
-                actions.delete_students(route_to_work_with)
-                continue
-            elif options == "6":
                 actions.unapproved_students(route_to_work_with)
                 continue
-            elif options == "7":
+            elif options == "6":
                 print("Closing the program, see you later!")
                 break
             else:

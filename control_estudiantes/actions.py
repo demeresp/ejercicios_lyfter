@@ -259,39 +259,4 @@ def unapproved_students(route=None):
     return unapproved
 
 
-def delete_students(route):
-
-    students = data_ex_im.file_reader(route)
-    if not students:
-            print("There are no students to delete.")
-            return None
-
-    while True:
-        new_students = []
-        try:
-            student_to_delete = student_name()
-            student_to_delete_grade = grad_student()
-            student_exists = duplicates_validator()
-            if student_exists:
-                print("The student you want to delete does not exist, please check the information and try again.")
-                return None
-            new_file = data_ex_im.file_saver(new_students, route)
-            print(f"Student {student_to_delete} from grade {student_to_delete_grade} has been successfully deleted.")
-            o_des = input("Would you like to delete another student? y / n:").strip().lower()
-            if o_des == "y":
-                continue
-            elif o_des == "n":
-                    print("Going back...")
-                    break
-            else:
-                    print("Make sure you are only typing y or n")
-                    continue
-        except ValueError:
-            print("Make sure you are only typing letters for the name and a valid grade format (e.g., '1A', '2B', etc.)")
-            continue
-        except (FileNotFoundError, PermissionError) as error:
-            print(f"Error: {error}. Please provide a valid route and check your permissions.")
-            continue
-    return new_file
-
 
