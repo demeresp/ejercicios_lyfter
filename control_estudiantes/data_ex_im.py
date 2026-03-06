@@ -15,7 +15,7 @@ def file_reader(route):
 
 def student_saver(file, student):
     try:
-        with open(file, 'a', encoding="utf-8") as f:
+        with open(file, 'a', newline="", encoding="utf-8") as f:
             columns = ["grade", "name", "spanish", "english", "history", "sciences"]
             content = csv.DictWriter(f, fieldnames=columns)
             content.writerow(student)
@@ -28,13 +28,14 @@ def student_saver(file, student):
 def file_saver(route, content):
     columns = ["grade", "name", "spanish", "english", "history", "sciences"]
     try:
-        with open(route, "w", encoding="utf-8") as file:
+        with open(route, "w", newline="", encoding="utf-8") as file:
             content_writer = csv.DictWriter(file, fieldnames=columns) 
             content_writer.writeheader()
             content_writer.writerows(content)
     except FileNotFoundError as oops:
         print("Looks like this file is not foundable right now...")
     return content
+
 
 
 def route_validator(route=None):

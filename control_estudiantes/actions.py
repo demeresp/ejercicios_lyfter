@@ -3,7 +3,7 @@ import data_ex_im
 
 
 def student_name():
-        name_student = input("Type student name:",).strip()
+        name_student = input("Type student name:",).strip().upper()
         for l in name_student:
             if not name_student or any(l.isdigit() for l in name_student):
                 print("Make sure you are only typing letters and that the name is not empty")
@@ -46,10 +46,14 @@ def student_notes():
 
 
 
-def all_students_average(route=None):
-    route = data_ex_im.route_validator()
+def all_students_average(route):
+    if route is None:
+        route = data_ex_im.route_validator()
+
     students_list = data_ex_im.file_reader(route)
-    
+    if not students_list:
+        print("The current file is empty, please add students to work with")
+
     av_sum = 0.0
     
     for student in students_list:
@@ -64,7 +68,7 @@ def all_students_average(route=None):
             print("Error processing student data")
             continue
 
-        result = av_sum / len(students_list)
+    result = av_sum / len(students_list)
 
     print(f"The general average of all students is: {result:.2f}") #:.2f para mostrar solo 2 decimales, puede usarse 3, 4... lo que se quiera, es un formato para mostrar el resultado de forma pro
     
@@ -72,9 +76,13 @@ def all_students_average(route=None):
 
 
 
-def best_3_avrg(route=None):
-    route = data_ex_im.route_validator()
+def best_3_avrg(route):
+    if route is None:
+        route = data_ex_im.route_validator()
+
     students_list = data_ex_im.file_reader(route)
+    if not students_list:
+        print("The current file is empty, please add students to work with")
     
     avrg_list = []
     
@@ -99,21 +107,19 @@ def best_3_avrg(route=None):
 
 
 
-def student_list(route=None):
-        
-        try:
-            print("Loading current students list...")
-            route = data_ex_im.route_validator()
-            grades = data_ex_im.file_reader(route) #splitlines para que cada estudiante quede en una línea diferente, sino quedaría todo como un string gigante y no se podría mostrar de forma ordenada
-            amount_of_students = len(grades)
-            print("The total amount of students is:", amount_of_students)
-            for i, student in enumerate(grades, start=1): #segundo i indica donde empezara enumerate
+def student_list(route): 
+    try:
+        print("Loading current students list...")
+        grades = data_ex_im.file_reader(route) 
+        amount_of_students = len(grades)
+        print("The total amount of students is:", amount_of_students)
+        for i, student in enumerate(grades, start=1): #segundo i indica donde empezara enumerate
                 
-                print(f"{i}. {student['name']} (Grade: {student['grade']})") 
+            print(f"{i}. {student['name']} (Grade: {student['grade']})") 
                 
-        except FileNotFoundError as Nofile:
-            print("The file provided is not foundable")
-        return grades
+    except FileNotFoundError as Nofile:
+        print("The file provided is not foundable")
+    return grades
 
 
 
@@ -130,7 +136,14 @@ def n_student_dictionary():
             **notes_stud
         }
 
-        stage_of_students.append(new_stud)
+        verifier  = any(
+            stud["name"].strip().lower() == s_name.strip().lower() and
+            stud["grade"].strip().upper() == grade.strip().upper() for stud in stage_of_students)
+        if verifier:
+            print(f"Student {s_name}, {grade} is already on the list, please set it in another grade")
+            continue
+        else:
+            stage_of_students.append(new_stud)
         print(f"Student {s_name} has been successfully added to list of students to be added")
         try:
             des = input("Would you like to add another student? y / n:").strip().lower()
@@ -147,15 +160,30 @@ def n_student_dictionary():
 
 
 
-def add_student(existing_students=None, new_students=None, n_route=None):
+def duplicates_validator(new_students, current_students):
+    for new in new_students:
+        
 
-    if not n_route:
+        verifier = any(
+            stud["name"].strip().lower() == new["name"].strip().lower() and
+            stud["grade"].strip().upper() == new["grade"].strip().upper() for stud in current_students
+        )
+
+
+    if verifier:
+        print(f"Student(s), {new["name"]}, ({new["grade"]}) is already on the list, please set it in other grade(s)")
+        return True
+    elif not verifier:
+            pass
+
+
+
+def add_student(existing_students, n_route, new_students=None):
+    
+    if n_route is None:
         n_route = data_ex_im.route_validator()
-        if not n_route:
-            print("The route cannot be empty, please provide a valid route")
-            return None
-
     existing_students = data_ex_im.file_reader(n_route)
+    
     while True:
         if new_students is None:
             new_students = n_student_dictionary()
@@ -164,23 +192,17 @@ def add_student(existing_students=None, new_students=None, n_route=None):
             print("There are no new students to add, please add a student first")
             continue
 
-        
-        already_exists = any(
-            s["name"].strip().lower() == new_students[0]["name"].strip().lower() and
-            s["grade"].strip().upper() == new_students[0]["grade"].strip().upper()
-            for s in existing_students
-        )
-
-        if already_exists:
-            print(F"One or more students already exists in the current list, please check the information before adding")
-            return None
-
         f_des = input(f"Are you sure you would like to add {len(new_students)} student(s)? y / n:").strip().lower()
         if f_des == "y":
             existing_students.extend(new_students)
             for student in new_students:
-                data_ex_im.student_saver(n_route, student)
-            print(f"Added {len(new_students)} student(s).")
+                already_exists = duplicates_validator(new_students, existing_students)
+                if already_exists:
+                    continue
+                elif student not in already_exists:
+                    data_ex_im.student_saver(n_route, student)
+                    print(f"Added {len(new_students)} student(s).")
+                continue
             
             o_des = input("Would you like to add more students? y / n:").strip().lower()
             if o_des not in ["y", "n"]:
@@ -205,9 +227,13 @@ def add_student(existing_students=None, new_students=None, n_route=None):
 
 
 def unapproved_students(route=None):
-    route = data_ex_im.route_validator()
+    if route is None:
+        route = data_ex_im.route_validator()
+
     students_list = data_ex_im.file_reader(route)
-    
+    if not students_list:
+        print("The current file is empty, please add students to work with")
+
     unapproved = []
     
     for student in students_list:
@@ -233,34 +259,22 @@ def unapproved_students(route=None):
     return unapproved
 
 
-#def delete_students(route=None):
+def delete_students(route):
 
-    route = data_ex_im.route_validator()
     students = data_ex_im.file_reader(route)
+    if not students:
+            print("There are no students to delete.")
+            return None
 
     while True:
         new_students = []
-        if not students:
-            print("There are no students to delete.")
-            return None
         try:
-            student_to_delete = input("Please, type the name of the student you want to delete:").strip()
-            student_to_delete_grade = input("Please, type the grade of the student you want to delete:").strip().upper()
-            des = input(f"Are you sure you want to delete {student_to_delete} from grade {student_to_delete_grade}? y / n:").strip().lower()
-            if des == "y":
-                pass
-            elif des == "n":
-                print("Cancelled. Going back...")
-                return None
-            student_exists = any(
-                s["name"].strip().lower() == student_to_delete.strip().lower() and
-                s["grade"].strip().upper() == student_to_delete_grade.strip().upper()
-                for s in students
-            ) 
-            if not student_exists:
+            student_to_delete = student_name()
+            student_to_delete_grade = grad_student()
+            student_exists = duplicates_validator()
+            if student_exists:
                 print("The student you want to delete does not exist, please check the information and try again.")
                 return None
-            new_students = [s for s in students if not (s["name"].strip().lower() == student_to_delete.strip().lower() and s["grade"].strip().upper() == student_to_delete_grade.strip().upper())]
             new_file = data_ex_im.file_saver(new_students, route)
             print(f"Student {student_to_delete} from grade {student_to_delete_grade} has been successfully deleted.")
             o_des = input("Would you like to delete another student? y / n:").strip().lower()
@@ -279,3 +293,5 @@ def unapproved_students(route=None):
             print(f"Error: {error}. Please provide a valid route and check your permissions.")
             continue
     return new_file
+
+
