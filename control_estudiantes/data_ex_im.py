@@ -18,6 +18,7 @@ def student_saver(file, student):
         with open(file, 'a', newline="", encoding="utf-8") as f:
             columns = ["grade", "name", "spanish", "english", "history", "sciences"]
             content = csv.DictWriter(f, fieldnames=columns)
+            content.writeheader()
             content.writerow(student)
     except FileNotFoundError as error:
         print("The file indicated does not exist")
@@ -42,6 +43,7 @@ def route_validator(route=None):
 
     while True:
         route = input("Please, provide the route to the file where you want to work with: ").strip()
+        
 
         if not route.endswith(".csv"):
             print("The file should be a .csv")
@@ -49,15 +51,10 @@ def route_validator(route=None):
         elif os.path.isdir(route):
             print("The route provided is a directory, not a file")
             continue
-        elif not os.path.exists(route):
-            print("The file provided does not exist, please provide a valid route")
-            continue
 
         try:
             with open(route, 'r', encoding="utf-8") as file:
                 return route
-        except FileNotFoundError as invalid_route: #1.Archivo no encontrado, 2.Permiso denegado, 3.Caracteres invalidos de ruta, 4.El archivo es un directorio, no carpeta, 5. El archivo no se puede leer con ese encoding el 'utf-8' pues! 
-            print(f"Error: {invalid_route}. Please provide a valid route.")
         except PermissionError as permission_error:
             print(f"Permission error: {permission_error}. Please check your permissions for the file.")
         except IsADirectoryError as is_a_directory_error:

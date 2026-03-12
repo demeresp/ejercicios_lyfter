@@ -46,80 +46,94 @@ def student_notes():
 
 
 
-def all_students_average(route):
-    if route is None:
-        route = data_ex_im.route_validator()
+def all_students_average(route=None):
 
-    students_list = data_ex_im.file_reader(route)
-    if not students_list:
-        print("The current file is empty, please add students to work with")
+    while True:
+        if not route:
+            print("Please provide a route to read first. (Option 1.)")
+            raise FileNotFoundError
 
-    av_sum = 0.0
-    
-    for student in students_list:
-        try:
-            spanish = float(student["spanish"])
-            english = float(student["english"])
-            history = float(student["history"])
-            sciences = float(student["sciences"]) # convertir a float pa que no trate como strings lo que trae CSV, si trata como lista *keyerror
-            avrg = (spanish + english + history + sciences) / 4
-            av_sum += avrg
-        except (KeyError, TypeError):
-            print("Error processing student data")
-            continue
+        students_list = data_ex_im.file_reader(route)
+        if not students_list:
+            print("The current file is empty, please add students to work with")
 
-    result = av_sum / len(students_list)
+        av_sum = 0.0
+        
+        for student in students_list:
+            try:
+                spanish = float(student["spanish"])
+                english = float(student["english"])
+                history = float(student["history"])
+                sciences = float(student["sciences"]) # convertir a float pa que no trate como strings lo que trae CSV, si trata como lista *keyerror
+                avrg = (spanish + english + history + sciences) / 4
+                av_sum += avrg
+            except (KeyError, TypeError):
+                print("Error processing student data")
+                continue
 
-    print(f"The general average of all students is: {result:.2f}") #:.2f para mostrar solo 2 decimales, puede usarse 3, 4... lo que se quiera, es un formato para mostrar el resultado de forma pro
-    
-    return result
+        result = av_sum / len(students_list)
+
+        print(f"The general average of all students is: {result:.2f}") #:.2f para mostrar solo 2 decimales, puede usarse 3, 4... lo que se quiera, es un formato para mostrar el resultado de forma pro
+        
+        return result
 
 
 
 def best_3_avrg(route):
-    if route is None:
-        route = data_ex_im.route_validator()
+        
+    while True:
 
-    students_list = data_ex_im.file_reader(route)
-    if not students_list:
-        print("The current file is empty, please add students to work with")
-    
-    avrg_list = []
-    
-    for student in students_list:
-        try:
-            spanish = float(student["spanish"])
-            english = float(student["english"])
-            history = float(student["history"])
-            sciences = float(student["sciences"])
-            avrg = (spanish + english + history + sciences) / 4  #le sumo el nombre para que no se pierda la referencia a qué estudiante corresponde cada promedio, sino solo tendría los promedios sin saber a quién pertenecen
-            avrg_list.append((avrg, student["name"], student["grade"])) #lo guardo como tupla para que el orden se mantenga, si lo guardara como lista se perderia la referencia entre el promedio y el nombre al ordenar por promedio
-        except (KeyError, TypeError):
-            print("Error processing student data")
-            continue
+        if not route:
+            print("Please provide a route to read first. (Option 1.)")
+            return False
 
-    best_3 = sorted(avrg_list, reverse=True)[:3]
-    print("The best 3 students are:")
-    for avrg, name, grade in best_3:
-        print(f"{name} (Grade: {grade}) with an average of {avrg:.2f}")
-    
+        students_list = data_ex_im.file_reader(route)
+        if not students_list:
+            print("The current file is empty, please add students to work with")
+        
+        avrg_list = []
+        
+        for student in students_list:
+            try:
+                spanish = float(student["spanish"])
+                english = float(student["english"])
+                history = float(student["history"])
+                sciences = float(student["sciences"])
+                avrg = (spanish + english + history + sciences) / 4  #le sumo el nombre para que no se pierda la referencia a qué estudiante corresponde cada promedio, sino solo tendría los promedios sin saber a quién pertenecen
+                avrg_list.append((avrg, student["name"], student["grade"])) #lo guardo como tupla para que el orden se mantenga, si lo guardara como lista se perderia la referencia entre el promedio y el nombre al ordenar por promedio
+            except (KeyError, TypeError):
+                print("Error processing student data")
+                continue
+
+        best_3 = sorted(avrg_list, reverse=True)[:3]
+        print("The best 3 students are:")
+        for avrg, name, grade in best_3:
+            print(f"{name} (Grade: {grade}) with an average of {avrg:.2f}")
+        
     return best_3
 
 
 
-def student_list(route): 
-    try:
-        print("Loading current students list...")
-        grades = data_ex_im.file_reader(route) 
-        amount_of_students = len(grades)
-        print("The total amount of students is:", amount_of_students)
-        for i, student in enumerate(grades, start=1): #segundo i indica donde empezara enumerate
-                
-            print(f"{i}. {student['name']} (Grade: {student['grade']})") 
-                
-    except FileNotFoundError as Nofile:
-        print("The file provided is not foundable")
-    return grades
+def student_list(route=None): 
+    
+    while True:
+        if not route:
+            print("Please provide a route to read first. (Option 1)")
+            raise FileNotFoundError
+            
+
+        try:
+            print("Loading current students list...")
+            grades = data_ex_im.file_reader(route) 
+            amount_of_students = len(grades)
+            print("The total amount of students is:", amount_of_students)
+            for i, student in enumerate(grades, start=1): #segundo i indica donde empezara enumerate
+                    
+                print(f"{i}. {student['name']} (Grade: {student['grade']})") 
+                    
+        except FileNotFoundError as Nofile:
+            print("The file provided is not foundable")
+        return grades
 
 
 
@@ -171,63 +185,18 @@ def duplicates_validator(new_students, current_students):
 
 
     if verifier:
-        print(f"Student(s), {new["name"]}, ({new["grade"]}) is already on the list, please set it in other grade(s)")
+        print(f"Student(s), {new["name"]}, ({new["grade"]}) already exists....")
         return True
     elif not verifier:
             pass
 
 
 
-def add_student(existing_students, n_route, new_students=None):
-    if n_route is None:
-        n_route = data_ex_im.route_validator()
-    existing_students = data_ex_im.file_reader(n_route)
-    
-    while True:
-        if new_students is None:
-            new_students = n_student_dictionary()
+def unapproved_students(route):
 
-        if not new_students:
-            print("There are no new students to add, please add a student first")
-            continue
-
-        f_des = input(f"Are you sure you would like to add {len(new_students)} student(s)? y / n:").strip().lower()
-        if f_des == "y":
-            existing_students.extend(new_students)
-            for student in new_students:
-                already_exists = duplicates_validator(new_students, existing_students)
-                if already_exists:
-                    continue
-                elif student not in already_exists:
-                    data_ex_im.student_saver(n_route, student)
-                    print(f"Added {len(new_students)} student(s).")
-                continue
-            
-            o_des = input("Would you like to add more students? y / n:").strip().lower()
-            if o_des not in ["y", "n"]:
-                print("Make sure you are only typing y or n")
-                continue
-            elif o_des == "y":
-                new_students = None
-                continue
-            elif o_des == "n":
-                print("Going back...")
-                break
-            else:
-                print("Make sure you are only typing y or n")
-                continue
-        elif f_des == "n":
-            print("Cancelled. Going back...")
-            return None
-        else:
-            print("Make sure you are only typing y or n")
-            continue
-
-
-
-def unapproved_students(route=None):
-    if route is None:
-        route = data_ex_im.route_validator()
+    if not route:
+        print("You have not provided a file to read yet, please go back to option 1.")
+        return False
 
     students_list = data_ex_im.file_reader(route)
     if not students_list:
@@ -237,7 +206,7 @@ def unapproved_students(route=None):
     
     for student in students_list:
         try:
-            spanish = float(student["spanish"])
+            spanish = float(student["spanish"]) 
             english = float(student["english"])
             history = float(student["history"])
             sciences = float(student["sciences"])
