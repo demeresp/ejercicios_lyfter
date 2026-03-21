@@ -15,7 +15,7 @@ def file_reader(route):
 
 def student_saver(file, student):
     try:
-        header_needed = not os.path.exists(file) or os.path.getsize(file) == 0
+        header_needed = not os.path.exists(file) or os.path.getsize(file) == 0 #getsize para medir bytes del file
         with open(file, 'a', newline="", encoding="utf-8") as f:
             columns = ["grade", "name", "spanish", "english", "history", "sciences"]
             content = csv.DictWriter(f, fieldnames=columns)
