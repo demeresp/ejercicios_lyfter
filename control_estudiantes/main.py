@@ -1,3 +1,5 @@
-import menu
+from menu import Menu
 
-menu.main_menu()
+
+stud_menu = Menu()
+stud_menu.options_operator()

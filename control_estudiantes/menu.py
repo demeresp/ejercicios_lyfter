@@ -1,94 +1,101 @@
 import actions
 import data_ex_im
 
-def main_menu():
 
-    route_to_work_with = None
+class Menu:
 
-    students_to_add = None
+    def __init__(self):
+        print("Welcome to the student control system!")
+        self.route_to_work_with = None
+        self.students_to_add = None
 
-    while True: 
-        print("Welcome to the student-control system by Emers!")
-        try:
-            options = int(input("""Please, type the option you would like to follow:
-                                
-                        To import an specific route (recommended first). 1
-                                
-                        To enter students information. 2
-                                
-                        To save the students added. 3
 
-                        To see how many of students you currently have. 4
+    def show_options_in_menu(self):
+        return int(input("""
+Please, select an option from the menu:
+                        1. Load a file to work with
+                        2. Enter students information
+                        3. Save the students added
+                        4. See how many students you currently have
+                        5. See the general average of your students
+                        6. See the best 3 students you have
+                        7. Check unapproved students
+                        8. Close the program
+"""))
 
-                        To see the general average of your students. 5
-
-                        To see the best 3 sudents you have. 6
-                        
-                        To check unapproved students. 7
-                        
-                        To close the program. 8
-                        
-                            
-                            :   """    , ).strip())
-            if options == 1:
-                route_to_work_with = data_ex_im.route_validator()
-                print("Working on:", route_to_work_with)
-                continue
-            elif options == 2:
-                students_to_add = actions.n_student_dictionary()
-                continue
-            elif options == 3:
-                current_students = data_ex_im.file_reader(route_to_work_with)
-                if not students_to_add:
-                        print("Please add some student(s) at the 2nd option back in the menu")
+    
+    def options_operator(self):
+        while True:
+            try:
+                options = self.show_options_in_menu()
+                if options == 1:
+                    self.route_to_work_with = data_ex_im.route_validator()
+                    print(f"You are now working with the file: {self.route_to_work_with}")
+                elif options == 2:
+                    if not self.route_to_work_with:
+                        print("Please add a route to work first at option 1!")
                         continue
-                elif not route_to_work_with:
-                        print("You have not provided a route to work, please specify a file route first")
+                    else:
+                        self.students_to_add = actions.student_object()
+                elif options == 3:
+                    if not self.route_to_work_with:
+                        print("Please add a route to work first at option 1!")
                         continue
+                    if not self.students_to_add:
+                        print("You must add some students first at option 2!")
+                    else:
+                        data_ex_im.file_saver(self.route_to_work_with, self.students_to_add)
+                elif options == 4:
+                    if not self.route_to_work_with:
+                        print("You have not provided a file to read yet, please go back to option 1.")
+                        continue
+                    else:
+                        students_list = data_ex_im.file_reader(self.route_to_work_with)
+                        print(f"You currently have {len(students_list)} students in your file.")
+                elif options == 5:
+                    if not self.route_to_work_with:
+                        print("You have not provided a file to read yet, please go back to option 1.")
+                        continue
+                    else:
+                        students_list = data_ex_im.file_reader(self.route_to_work_with)
+                        if students_list:
+                            avrg = actions.general_average(students_list)
+                            print(f"The general average of your students is: {avrg:.2f}")
+                        else:
+                            print("The current file is empty, please add students to work with")
+                elif options == 6:
+                    if not self.route_to_work_with:
+                        print("You have not provided any file to get students, please check option 1")
+                        continue
+                    else:
+                        best_3 = actions.best_students(self.route_to_work_with)
+                        if best_3:
+                            print("The best 3 students you have are:")
+                            for avg, name, grade in best_3:
+                                print(f"{name} from grade {grade} with an average of {avg:.2f}")
+                        else:
+                            print("All students are approved")
+                        continue
+                elif options == 7:
+                    if not self.route_to_work_with:
+                        print("You have not provided a file to read yet, please go back to option 1.")
+                        continue
+                    else:
+                        unapproved = actions.unapproved_students(self.route_to_work_with)
+                        if unapproved:
+                            print("The unapproved students are:")
+                            for name, grade, avg in unapproved:
+                                print(f"{name} from grade {grade} with an average of {avg:.2f}")
+                        else:
+                            print("All students are approved")
+                elif options == 8:
+                    print("Closing the program, goodbye!")
+                    break
                 else:
-                    verifier = actions.duplicates_validator(students_to_add, current_students)                   
-                if verifier:
-                    print("Please try another grade/name")
-                    continue
-                else:
-                    current_students.extend(students_to_add)
-                    for stud in students_to_add:
-                        data_ex_im.student_saver(route_to_work_with, stud)
-                    print(f"Added {len(students_to_add)} student(s).")  
+                    print("Please, select a valid option from the menu.")
+            except ValueError:
+                print("Please, enter a number corresponding to the options in the menu.")
                 continue
-            elif options == 4:
-                if route_to_work_with is None:
-                    print("To display a list of students, load a file first (option 1)")
-                    continue
-                else:
-                    actions.student_list(route_to_work_with)
-                    continue
-            elif options == 5:
-                if route_to_work_with is None:
-                    print("To display a list of students, load a file first (option 1)")
-                    continue
-                actions.all_students_average(route_to_work_with)
-                continue
-            elif options == 6:
-                if route_to_work_with is None:
-                    print("To display a list of students, load a file first (option 1)")
-                    continue
-                actions.best_3_avrg(route_to_work_with)
-                continue
-            elif options == 7:
-                if route_to_work_with is None:
-                    print("To display a list of students, load a file first (option 1)")
-                    continue
-                actions.unapproved_students(route_to_work_with)
-                continue                
-            elif options == 8:
-                print("Closing the program, see you later!")
+            except KeyboardInterrupt:
+                print("\nProgram interrupted.")
                 break
-            else:
-                print("Please, only type numbers between 1-8")
-                continue
-        except ValueError:
-                print("You only may type numbers (1-8)")
-        except KeyboardInterrupt:
-            print("Getting out of the program due to a keyborad interruption, see you later")
-            break

@@ -1,13 +1,17 @@
 import csv
 import os
-
+from student_builder import Student
 
 
 def file_reader(route):
     with open(route, 'r', encoding="utf-8") as file:
         try:
             reader = csv.DictReader(file)
-            return list(reader)
+            students = []
+            for row in reader:
+                student = Student(row["name"], row["grade"], row)
+                students.append(student)
+            return students 
         except FileNotFoundError:
             print("The route provided is invalid")
 
@@ -21,8 +25,16 @@ def student_saver(file, student):
             content = csv.DictWriter(f, fieldnames=columns)
             if header_needed:
                 content.writeheader()
+            
+            student_dict = {
+                "grade": student.grade,
+                "name": student.name,
+                "spanish": student.spanish,
+                "english":student.english,
+                "history":student.history,
+                "sciences":student.sciences}
 
-            content.writerow(student)
+            content.writerow(student_dict)
 
     except FileNotFoundError as error:
         print("The file indicated does not exist")
@@ -36,7 +48,20 @@ def file_saver(route, content):
         with open(route, "w", newline="", encoding="utf-8") as file:
             content_writer = csv.DictWriter(file, fieldnames=columns) 
             content_writer.writeheader()
-            content_writer.writerows(content)
+
+            student_to_dict = []
+            for student in content:
+                student_dict = {
+                    "grade": student.grade,
+                    "name": student.name,
+                    "spanish": student.spanish,
+                    "english": student.english,
+                    "history": student.history,
+                    "sciences": student.sciences
+                }
+                student_to_dict.append(student_dict)
+                
+            content_writer.writerows(student_to_dict)
     except FileNotFoundError as oops:
         print("Looks like this file is not foundable right now...")
     return content
