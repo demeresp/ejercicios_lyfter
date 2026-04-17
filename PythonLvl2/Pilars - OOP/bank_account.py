@@ -4,11 +4,11 @@ class BankAccount:
 
 
     def add_money(self, amount):
-        self.balance -= amount
+        self.balance += amount
 
     
     def take_money(self, amount):
-        self.balance += amount
+        self.balance -= amount
 
 
 
@@ -17,13 +17,17 @@ class SavingsAccount(BankAccount):
         super().__init__(balance)
         self.min_balance = min_balance
 
-    
+
     def take_money(self, amount):
-        if self.balance - amount < self.min_balance:
-            raise ValueError("No sufficent founds to create this savings account, please work")
+        result = self.balance - amount
+        if result < self.min_balance:
+            raise ValueError("Insuffiecient founds to proceed!")
+        self.balance = result
+        return self.balance
 
 
 
 
-account = SavingsAccount(1000, 2000)
-account.take_money(2000)
+account = SavingsAccount(10000, 2000)
+after_saving = account.take_money(2000)
+print("Remaining balance is:", after_saving)
