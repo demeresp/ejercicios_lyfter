@@ -24,9 +24,8 @@ class Circle(Shape):
     
 
 class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
+    width = 90
+    height = 50
 
     
     def calculate_perimeter(self):
@@ -59,7 +58,7 @@ my_square = square(4)
 print("Square perimeter:", my_square.calculate_perimeter())
 print("Square area:", my_square.calculate_area())
 
-my_rectangle = Rectangle(4, 6)
+my_rectangle = Rectangle()
 print("Rectangle perimeter:", my_rectangle.calculate_perimeter())
 print("Rectangle area:", my_rectangle.calculate_area())
 
