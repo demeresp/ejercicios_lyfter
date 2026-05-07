@@ -22,4 +22,4 @@ class Employee:
 
 
 emp1 = Employee("John", 100)
-print(emp1.show_info)  
+print(emp1.show_info)
