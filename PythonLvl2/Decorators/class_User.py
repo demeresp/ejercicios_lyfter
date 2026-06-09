@@ -6,8 +6,8 @@ class User:
 
     @property
     def age(self):
-        today = date.today
-        return today.year - self.date_of_b
+        today = date.today()
+        return today.year - self.date_of_b.year
     
 
 def if_adult(fun):
