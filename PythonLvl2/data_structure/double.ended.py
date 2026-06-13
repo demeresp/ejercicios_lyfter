@@ -44,9 +44,9 @@ class DoubleQueue(LinkedList):
             self.head = new_node
             self.tail = new_node
         else:                                    # Ya hay nodos
-            new_node.prev = self.tail            #  El nuevo nodo apunta hacia atrás (al viejo tail)
+            new_node.prev = self.tail            # El nuevo nodo apunta hacia atrás (al viejo tail)
             self.tail.next = new_node            # El viejo tail apunta hacia adelante (al nuevo)
-            self.tail = new_node# ←Actualizamos tail
+            self.tail = new_node #Actualizamos tail
 
 
     def pop_left(self):
