@@ -55,7 +55,7 @@ class DoubleQueue(LinkedList):
             print("There are no nodes to remove")
         else:
             removed_data = self.head
-            self.head = self.head.prev
+            self.head = self.head.next
             return removed_data.data
 
 
