@@ -9,7 +9,7 @@ def bubble_sort_inverted(list_of_numbers):
 
             print(f"Num:{num}, current number:{current}, number to compare:{next_number}")
             
-            if current > next_number:
+            if current < next_number:
                 swapped = True           
                 list_of_numbers[num - 1] = current
                 print(f"Moving {current} element to {next_number} position")
