@@ -12,9 +12,9 @@ def test_to_check_if_parameters_are_strings():
 
 def test_to_check_if_parameters_are_not_zero():
     with pytest.raises(TypeError):
-        lower_upper(0)
+        lower_upper(0, 0, 0)
 
 
 def test_negative_numbers_in_result():
     with pytest.raises(TypeError):
-        lower_upper(-1)
+        lower_upper(-1, -1, -1)
