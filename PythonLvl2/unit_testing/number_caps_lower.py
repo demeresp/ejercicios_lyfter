@@ -6,4 +6,4 @@ def lower_upper(word1, word2, word3):
         result.append(f"'{word}' tiene: {upper} mayusculas y {lower} minusculas ")
     return "\n".join(result)
 
-print(lower_upper("El bicho", "Critiano", "SIIUuuu"))
+print(lower_upper("World", "Cup", "Final"))

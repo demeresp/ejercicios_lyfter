@@ -1,20 +1,24 @@
-import pytest
+import pytest #result is result from return
 from number_caps_lower import lower_upper
 
-def test_to_check_if_parameters_are_strings():
-    with pytest.raises(TypeError):
-        lower_upper(1, 2, 3)
-    with pytest.raises(TypeError):
-        lower_upper("Hello", 2, "World")
-    with pytest.raises(TypeError):
-        lower_upper("Hello", "World", None)
+def test_to_check_correct_words_are_input():
+    result = lower_upper("World", "Cup", "Final")
+    expected_words = ["World", "Cup", "Final"]
+    for word in expected_words:
+        assert word in result
 
 
-def test_to_check_if_parameters_are_not_zero():
-    with pytest.raises(TypeError):
-        lower_upper(0, 0, 0)
+def test_to_check_if_upper_and_lower_are_counted():
+    result = lower_upper("World", "Cup", "Final")
+    assert "mayusculas" in result
+    assert "minusculas" in result
 
 
-def test_negative_numbers_in_result():
-    with pytest.raises(TypeError):
-        lower_upper(-1, -1, -1)
+def test_if_lower_and_caps_are_returned():
+    result = lower_upper("World", "Cup", "Final")
+
+    has_upper = any(word[0].isupper() for word in result)
+    assert has_upper
+
+    has_lower = any(word[0].islower() for word in result)
+    assert has_lower

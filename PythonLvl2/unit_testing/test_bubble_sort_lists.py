@@ -11,11 +11,11 @@ def test_small_list():
 
 
 def test_large_list():
-    large_input = list(range(100, 0, -1))
+    large_input = list(range(101, 0, -1))
     bubble_sort(large_input)
     
     assert large_input == sorted(large_input)
-    assert len(large_input) == 100
+    assert len(large_input) == 101
 
 
 def test_empty_list():
