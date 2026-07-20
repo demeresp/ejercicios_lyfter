@@ -16,7 +16,7 @@ def test_to_check_if_upper_and_lower_are_counted():
 
 def test_if_lower_and_caps_are_returned():
     result = lower_upper("World", "Cup", "Final")
-
+ 
     has_upper = any(word[0].isupper() for word in result)
     assert has_upper
 
