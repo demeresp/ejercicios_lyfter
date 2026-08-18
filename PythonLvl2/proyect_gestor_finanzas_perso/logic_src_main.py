@@ -4,6 +4,7 @@ class FinanceGestor:
 
     def __init__(self):
             self.available_spent_categories = ['entertainment', 'education', 'transportation']
+            self.available_income_features = ['job', 'trading']
             self.movements = []
 
 
@@ -11,7 +12,7 @@ class FinanceGestor:
         if not isinstance(amount, (int, float)):
             raise ValueError("Amount must be a number")
         elif amount < 0:
-            raise ValueError("Amount spent must be more than 0")
+            raise ValueError("Amount camnot be negative")
         else:
             return amount
 
@@ -33,20 +34,26 @@ class FinanceGestor:
             raise ValueError("Invalid date format, please use d/m/y")
 
 
-    def add_category(self, new_category):
-            if new_category not in self.available_spent_categories:
-                self.available_spent_categories.append(new_category)
+    def add_income_category(self, new_category):
+            if new_category not in self.available_income_features:
+                self.available_income_features.append(new_category)
             else:
                 raise ValueError("Category already exists")
 
 
+    def add_expense_category(self, new_category):
+        if new_category not in self.available_spent_categories:
+            self.available_spent_categories.append(new_category)
+        else:
+            ValueError("Category already exists")
+
+
     def add_income(self, title, category, date, amount):
-        if category not in self.available_spent_categories:
+        if category not in self.available_income_features:
             raise ValueError("Category does not exists, please add it first!")
 
         title = self.declare_description(title)
         amount = self.validate_spent_amount(amount)
-        category = self.add_category(category)
         date = self.date_validation(date)
 
         new_movement = Movement(title=title,
@@ -64,7 +71,6 @@ class FinanceGestor:
 
         title = self.declare_description(title)
         amount = self.validate_spent_amount(amount)
-        category = self.add_category(category)
         date = self.date_validation(date)
 
         new_movement = Movement(title=title,

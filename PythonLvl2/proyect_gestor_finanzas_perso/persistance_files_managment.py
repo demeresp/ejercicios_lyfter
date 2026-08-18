@@ -11,7 +11,7 @@ class DataManager:
             with open(route, "r", encoding='utf-8') as file:
                 reader = json.load(file)
                 if isinstance(reader, list):
-                    return [mv.from_dict_to_object(item) for item in reader]#retornar lista de mvs 
+                    return [mv.from_dict_to_object(item) for item in reader]#convertir a objeto
                 else:
                     return []
         except FileNotFoundError:
@@ -22,7 +22,8 @@ class DataManager:
 
     def save_movements(self, movements, route):
 
-        movements_dict = [mv.movements_to_dict() for mov in movements]
+        movements_dict = [mov.movements_to_dict() for mov in movements]
+
 
         os.makedirs(os.path.dirname(route), exist_ok=True)#si no hay carpeta crear una
         with open(route, 'w', encoding="utf-8") as file:
