@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Didi",
+        "category": "transportation",
+        "date": "12/08/2026",
+        "amount": 87.0,
+        "movement_type": "expense"
+    },
+    {
+        "title": "Trip",
+        "category": "didi",
+        "date": "19/08/2026",
+        "amount": 67.0,
+        "movement_type": "income"
+    },
+    {
+        "title": "salary",
+        "category": "job",
+        "date": "20/08/2026",
+        "amount": 50.0,
+        "movement_type": "income"
+    }
+]
