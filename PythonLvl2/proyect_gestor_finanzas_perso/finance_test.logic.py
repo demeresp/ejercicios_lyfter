@@ -37,8 +37,8 @@ def test_spent_amount_validation():
 
 def test_date_validation():
     gestor = fg()
-    valid_date = gestor.date_validation("13/08/2026" )
-    assert valid_date == "13/08/2026" 
+    valid_date = gestor.date_validation("13/08/2024" )
+    assert valid_date == "13/08/2024" 
 
 
 def test_if_amount_is_negative():
