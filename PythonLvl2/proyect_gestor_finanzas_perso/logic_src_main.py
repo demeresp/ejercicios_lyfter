@@ -3,16 +3,16 @@ from datetime import datetime
 class FinanceGestor:
 
     def __init__(self):
+            self.movements = []
             self.available_spent_categories = ['entertainment', 'education', 'transportation']
             self.available_income_features = ['job', 'trading']
-            self.movements = []
 
 
     def validate_spent_amount(self, amount):
         if not isinstance(amount, (int, float)):
             raise ValueError("Amount must be a number")
         elif amount < 0:
-            raise ValueError("Amount camnot be negative")
+            raise ValueError("Amount spent must be more than 0")
         else:
             return amount
 
@@ -45,7 +45,7 @@ class FinanceGestor:
         if new_category not in self.available_spent_categories:
             self.available_spent_categories.append(new_category)
         else:
-            ValueError("Category already exists")
+            raise ValueError("Category already exists")
 
 
     def add_income(self, title, category, date, amount):
@@ -87,13 +87,18 @@ class FinanceGestor:
         return self.movements 
 
 
-    def only_get_incomes(self):
-        return [mov for mov in self.movements if mov.movement_type == "income"]
+    @classmethod
+    def from_spent_dict_to_object(cls, data):
+        return cls(
+            available_spent_categories=data["available_spent_categories"]
+        )
 
 
-    def only_get_expenses(self):
-        return [mov for mov in self.movements if mov.movement_type == "expense"]
-
+    @classmethod
+    def from_income_dict_to_object(cls, data):
+        return cls(
+            available_income_features=data["available_income_features"]
+        )
 
 
 class Movement:
@@ -126,6 +131,5 @@ class Movement:
             date=data["date"],
             movement_type=data["movement_type"]
         )
-
 
 
