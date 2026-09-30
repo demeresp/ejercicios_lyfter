@@ -2,7 +2,7 @@
 
 ## 1. From Client to Server
 
-![Diagram of the client-server flow: client, DNS, ISP router, HTTP/HTTPS, server, and status codes](images/client-server-diagram.svg)
+![Diagram of the client-server flow: client, DNS, ISP router, HTTP/HTTPS, server, and status codes](file:///C:/Users/demer/Downloads/client-server-diagram.svg)
 
 - **Client**: the device (or, more precisely, the software running on it, like the browser) from which information is requested.
 - **DNS**: a translator, it tells the network which IP address corresponds to the domain you typed.
@@ -13,7 +13,6 @@
 - **HTTPS**: the same HTTP, but encrypted — more secure.
 - **Status codes**: the result of the request, grouped in hundreds — 2xx success, 4xx your error, 5xx server error.
 
-*Quick correction*: HTTP is not a "translator" (that's DNS's job) — it's the protocol that carries the request. And CRUD (Create, Read, Update, Delete) is a separate concept from HTTP methods, not the same thing.
 
 ## 2. Frontend and Backend in Action
 
@@ -23,7 +22,6 @@ Frontend and backend are two separate programs that understand each other thanks
 - **Backend**: uses a variety of languages, frameworks, and databases; it's the one with direct access to the database.
 - **Why they don't collapse between updates**: as long as the backend doesn't change the API contract, it can change everything internally without the frontend ever noticing.
 
-*Quick correction*: it's JavaScript, not Java (they're different languages). And the frontend never touches the database directly, only the backend does.
 
 ## 3. REST vs SOAP vs GraphQL
 
@@ -49,7 +47,7 @@ REST, because it's simple to implement, every developer already knows it, and it
   - POST - https://jsonplaceholder.typicode.com/posts
   - PUT/PATCH/DELETE - PUT to https://jsonplaceholder.typicode.com/posts/1
 
-> The exported collection file (and its environment, if applicable) goes inside the [`postman/`](postman/) folder as `.json`, outside of this README.
+
 
 ### 4.3 Execution and Analysis
 
