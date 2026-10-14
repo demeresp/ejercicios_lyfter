@@ -1,11 +1,11 @@
 -- Relationships
 -- 1. Shopping Cart 1:N Cart Items
 -- 2. Products 1:N Cart Items
--- 3. Shopping Cart 1:N Invoices
--- 4. Invoices 1:N Products Per Invoice
--- 5. Products 1:N Products Per Invoice
--- 6. Products N:N Shopping Cart (through Cart Items)
--- 7. Products N:N Invoices (through Products Per Invoice)
+-- 3. Invoices 1:N Products Per Invoice
+-- 4. Products 1:N Products Per Invoice
+-- 5. Products N:N Shopping Cart (through Cart Items)
+-- 6. Products N:N Invoices (through Products Per Invoice)
+-- Shopping Cart and Invoices are not related: the cart is temporary, the invoice is permanent.
 
 CREATE TABLE `Products`(
     `Code` BIGINT UNSIGNED NOT NULL PRIMARY KEY,
@@ -35,9 +35,7 @@ CREATE TABLE `Invoices`(
     `Invoice Number` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Purchase Date` DATE NOT NULL,
     `Buyer Email` VARCHAR(255) NOT NULL,
-    `Total Amount` DECIMAL(10,2) NOT NULL,
-    -- 1:N Shopping Cart -> Invoices
-    FOREIGN KEY(`Buyer Email`) REFERENCES `Shopping Cart`(`Buyer Email`)
+    `Total Amount` DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE `Products Per Invoice`(
