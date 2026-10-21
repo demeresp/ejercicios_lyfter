@@ -1,0 +1,4 @@
+#annotate 
+
+### SQL Lite, limitates from creating a new tabl3e with "the same name" but I did solved by telling it to create it even if exists
+##It seems it has a limitation when comes to delete tables. Columns is possible but tables are not directly.
