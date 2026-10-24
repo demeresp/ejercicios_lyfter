@@ -17,12 +17,12 @@ WHERE product_id = 1;
 Select product_id,
     SUM(quantity) as total_amount
     FROM Products_Per_Invoice
-GROUP BY product_id
+GROUP BY product_id;
 
 --all invoices from the same buyer
 
 Select * FROM Invoices
-WHERE buyer_id = espinozaemer29@gmail.com
+WHERE buyer_email = espinozaemer29@gmail.com;
 
 --invoices ordered by the total amount in descending order
 Select * FROM Invoices
