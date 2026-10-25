@@ -22,7 +22,7 @@ GROUP BY product_id;
 --all invoices from the same buyer
 
 Select * FROM Invoices
-WHERE buyer_email = espinozaemer29@gmail.com;
+WHERE buyer_email = 'espinozaemer29@gmail.com';
 
 --invoices ordered by the total amount in descending order
 Select * FROM Invoices
@@ -31,3 +31,13 @@ ORDER BY total_amount DESC;
 --invoices from one invoice per invoice number
 Select * FROM Invoices
 WHERE id = 3;
+
+SELECT * FROM Products
+WHERE name LIKE '%apple%';
+
+Select * FROM Products
+ORDER BY price DESC LIMIT 5;
+
+SELECT * FROM Products
+ORDER BY id ASC
+LIMIT 10;

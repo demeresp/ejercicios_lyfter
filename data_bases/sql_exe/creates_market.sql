@@ -38,3 +38,10 @@ CREATE TABLE IF NOT EXISTS Products_Per_Invoice (
     FOREIGN KEY (invoice_id) REFERENCES Invoices(id),
     FOREIGN KEY (product_id) REFERENCES Products(id)
 );
+
+CREATE TABLE IF NOT EXISTS Category (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name UNIQUE NOT NULL,
+    description TEXT
+);
+
