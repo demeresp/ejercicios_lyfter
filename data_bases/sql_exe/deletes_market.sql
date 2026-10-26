@@ -1,2 +1,10 @@
 -- SQLite
-DELETE FROM Products WHERE id IN (2, 3, 6, 7, 8)
+
+DELETE FROM Products
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM Products
+    GROUP BY name
+);
+
+DELETE FROM Products;
