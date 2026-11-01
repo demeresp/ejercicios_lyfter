@@ -1,0 +1,8 @@
+Me he dado cuenta que la tabla original presentaba redundancia de datos, especialmente en los atributos del vehículo (marca, modelo, año, color) y en la información de los propietarios.
+Para eliminar esta redundancia y cumplir con las formas normales, se separó la información en tres tablas:
+
+Owners: almacena los datos propios del propietario (ID, nombre y teléfono).
+Cars: contiene los atributos exclusivos del vehículo (VIN, marca, modelo, año y color).
+Car_Owners: tabla intermedia que resuelve la relación muchos a muchos entre vehículos y propietarios, e incluye la información del seguro, ya que esta depende de la combinación específica entre un carro y un dueño.
+
+Esta estructura evita la repetición de datos.

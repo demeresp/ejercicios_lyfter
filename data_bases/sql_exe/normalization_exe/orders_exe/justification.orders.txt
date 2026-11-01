@@ -1,0 +1,6 @@
+La tabla original presentaba una redundancia de datos, ya que la información del cliente, la dirección, el producto y los detalles de la orden se repetían en múltiples filas.Para eliminar esta redundancia y alcanzar una estructura normalizada, he dividido la información en las siguientes tablas:
+Customers: almacena los datos propios del cliente (ID, nombre y teléfono).
+Addresses: gestiona las distintas direcciones asociadas a cada cliente.
+Products: contiene la información de los productos (ID, nombre, precio y tiempo de preparación).
+Orders: representa la cabecera de la orden (cliente, dirección de entrega y hora de entrega).
+Order_Items: tabla intermedia que resuelve la relación muchos a muchos entre órdenes y productos, incluyendo la cantidad y las solicitudes especiales de cada ítem.
