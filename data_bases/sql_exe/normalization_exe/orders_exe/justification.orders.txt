@@ -1,6 +1,24 @@
-La tabla original presentaba una redundancia de datos, ya que la información del cliente, la dirección, el producto y los detalles de la orden se repetían en múltiples filas.Para eliminar esta redundancia y alcanzar una estructura normalizada, he dividido la información en las siguientes tablas:
-Customers: almacena los datos propios del cliente (ID, nombre y teléfono).
-Addresses: gestiona las distintas direcciones asociadas a cada cliente.
-Products: contiene la información de los productos (ID, nombre, precio y tiempo de preparación).
-Orders: representa la cabecera de la orden (cliente, dirección de entrega y hora de entrega).
-Order_Items: tabla intermedia que resuelve la relación muchos a muchos entre órdenes y productos, incluyendo la cantidad y las solicitudes especiales de cada ítem.
+Problema inicial:
+
+La tabla original presentaba una fuerte redundancia de datos. La información del cliente, la dirección, el producto y los detalles de la orden se repetían en múltiples filas cada vez que una orden contenía más de un producto. Esto generaba anomalías de actualización, inserción y eliminación.1FN (Primera Forma Normal):
+
+Se eliminaron los grupos repetitivos. Cada fila pasó a representar un único hecho atómico. El principal problema era que un mismo Order ID aparecía varias veces (una por cada producto de la orden). Esto se resolvió separando la información en una cabecera de orden y un detalle de productos.2FN (Segunda Forma Normal):
+
+Se eliminaron las dependencias parciales. Todos los atributos no clave dependen completamente de la clave primaria de su tabla.
+
+Para lograrlo se identificaron las entidades independientes: Customers, Addresses, Products y Orders.3FN (Tercera Forma Normal):
+
+Se eliminaron las dependencias transitivas. Los cambios principales fueron:
+Los datos del cliente (nombre y teléfono) se movieron a la tabla Customers, ya que no dependen de la orden, sino del cliente.
+Las direcciones se separaron en la tabla Addresses, porque un cliente puede tener múltiples direcciones y la dirección de entrega pertenece a una orden específica.
+La información del producto (nombre y precio) se extrajo a la tabla Products, evitando que se repita en cada orden.
+Se creó la tabla intermedia Order_Items para resolver la relación muchos a muchos entre Orders y Products. En esta tabla se colocaron los atributos que dependen de ambos (quantity y special_request).
+Resultado final:
+
+La estructura quedó organizada de la siguiente manera:
+Customers
+Addresses
+Products
+Orders (cabecera de la orden)
+Order_Items (detalle de productos por orden)
+Esta organización elimina la redundancia, garantiza la integridad referencial y facilita el mantenimiento y la consulta de los datos.
