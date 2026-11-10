@@ -16,7 +16,7 @@ LEFT JOIN Books ON Authors.id = Books.author
 --tomar la tabla de la izq/ ON - pegar info de / donde el ID de authos sea author de books(caso especifico) 
 WHERE Books.author IS NULL;
 
-SELECT Books.name
+SELECT DISTINCT Books.name
 FROM Books
 INNER JOIN Rents ON Books.id = Rents.book_id;
 
