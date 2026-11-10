@@ -1,0 +1,1 @@
+#Too delicate since once something is inserted/created it is not the same as the coding in python, you have to over-write in other documents with tommands to cocrreect mistakes here in SQLLite

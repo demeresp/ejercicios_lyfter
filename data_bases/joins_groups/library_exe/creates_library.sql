@@ -1,0 +1,27 @@
+-- SQLite
+CREATE TABLE Authors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(150) NOT NULL,
+    author INTEGER,
+    FOREIGN KEY (author) REFERENCES Authors(id)
+);
+
+CREATE TABLE Customers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Rents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id INTEGER NOT NULL,
+    customer_id INTEGER NOT NULL,
+    state VARCHAR(20) NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES Books(id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(id)
+);

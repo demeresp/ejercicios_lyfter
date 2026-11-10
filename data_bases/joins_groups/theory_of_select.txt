@@ -1,0 +1,120 @@
+DOCUMENTATION: THEORY OF SELECT
+ORDER BY, LIMIT, GROUP BY and JOINs
+
+========================================
+1. ORDER BY
+========================================
+
+ORDER BY is used to sort the results of a query.
+
+It can sort in two ways:
+- ASC: ascending order (from lowest to highest). This is the default value.
+- DESC: descending order (from highest to lowest).
+
+Example:
+SELECT name, price 
+FROM Products
+ORDER BY price DESC;
+
+This example returns all products sorted from the most expensive to the cheapest.
+
+
+========================================
+2. LIMIT
+========================================
+
+LIMIT is used to restrict the number of rows returned by a query. 
+It is especially useful when you only need the first results, for example the 5 most expensive products or the most recent record.
+
+Example:
+SELECT name, price 
+FROM Products
+ORDER BY price DESC
+LIMIT 5;
+
+This example returns only the 5 products with the highest price.
+
+
+========================================
+3. GROUP BY
+========================================
+
+GROUP BY is used to group rows that share the same value in one or more columns. 
+It is normally used together with aggregate functions such as COUNT(), SUM(), AVG(), MAX() or MIN().
+
+Example:
+SELECT product_id, SUM(quantity) AS total_sold
+FROM Products_Per_Invoice
+GROUP BY product_id;
+
+This example calculates the total quantity sold for each product.
+
+
+========================================
+4. JOINs
+========================================
+
+JOINs allow you to combine data from two or more tables through a common column (usually a Primary Key and a Foreign Key).
+
+----------------------------------------
+4.1 INNER JOIN
+----------------------------------------
+
+Returns only the rows that have a match in both tables. 
+If a record does not have a match in the other table, it will not appear in the result.
+
+Example:
+SELECT Products.name, Category.name AS category
+FROM Products
+INNER JOIN Category ON Products.category_id = Category.id;
+
+
+----------------------------------------
+4.2 LEFT JOIN
+----------------------------------------
+
+Returns all rows from the left table and the matching rows from the right table. 
+If there is no match, the columns from the right table will show NULL.
+
+Example:
+SELECT Products.name, Category.name AS category
+FROM Products
+LEFT JOIN Category ON Products.category_id = Category.id;
+
+
+----------------------------------------
+4.3 RIGHT JOIN
+----------------------------------------
+
+Returns all rows from the right table and the matching rows from the left table. 
+If there is no match, the columns from the left table will show NULL.
+
+Example:
+SELECT Products.name, Category.name AS category
+FROM Products
+RIGHT JOIN Category ON Products.category_id = Category.id;
+
+Note: SQLite does not support RIGHT JOIN natively. It is recommended to reverse the table order and use LEFT JOIN instead.
+
+
+========================================
+OBSERVATIONS
+========================================
+
+- ORDER BY is placed after WHERE and GROUP BY.
+- LIMIT is almost always written at the end of the query.
+- When using GROUP BY, every column that appears in the SELECT and is not an aggregate function must also appear in the GROUP BY clause.
+- It is recommended to use table aliases (example: Products p) to make queries shorter and more readable.
+- In practice, LEFT JOIN is preferred over RIGHT JOIN because of better readability and compatibility.
+- INNER JOIN is the most restrictive: it only shows real matches between the tables.
+
+
+========================================
+REFERENCES
+========================================
+
+https://www.sqlite.org/docs.html
+
+https://www.sqlite.org/lang_select.html
+
+https://grok.com/ (I have used IA for context guidance and design of the doc)

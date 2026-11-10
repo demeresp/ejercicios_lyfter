@@ -1,0 +1,24 @@
+Problema inicial:
+
+La tabla original presentaba redundancia de datos. Los atributos del vehículo (make, model, year), la información del propietario y los datos del seguro se repetían innecesariamente, lo que generaba anomalías de actualización e inconsistencias.1FN (Primera Forma Normal):
+
+Se eliminaron los grupos repetitivos y se aseguró que cada valor fuera atómico. Cada fila representa un único hecho y no hay atributos multivaluados.2FN (Segunda Forma Normal):
+
+Se eliminaron las dependencias parciales. Todos los atributos no clave dependen completamente de la clave primaria de su respectiva tabla.
+
+Para esto se separaron las entidades principales: Owners, Cars y Insurance_Policies.3FN (Tercera Forma Normal):
+
+Se eliminaron las dependencias transitivas. Los cambios realizados fueron:
+make, model y year se movieron a la tabla Car_Models, ya que describen un modelo de vehículo y no un vehículo individual. Esto evita que la misma información del modelo se repita por cada carro registrado.
+insurance_company dependía de insurance_policy. Se creó la tabla Insurance_Policies para eliminar esta dependencia transitiva.
+El seguro se asoció directamente al vehículo (Cars) y no a la relación entre dueño y carro, porque la póliza pertenece al auto y una misma póliza puede aplicarse a varios vehículos.
+Resultado final:
+
+La estructura quedó dividida en:
+Owners
+Car_Models
+Insurance_Policies
+Cars
+Car_Owners (tabla intermedia para la relación N:N entre dueños y vehículos)
+
+Esta organización elimina la redundancia, mejora la integridad de los datos y facilita el mantenimiento de la base de datos.
